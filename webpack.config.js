@@ -6,14 +6,14 @@ console.log('============env====', process.env.NODE_ENV);
 // var env = process.env.NODE_ENV === 'mock' ? config.mock.env : (
 //     process.env.NODE_ENV === 'development' ? config.dev.env : config.product.env
 // );
-var env = config[process.env.NODE_ENV].env
+var env = config[process.env.NODE_ENV] && config[process.env.NODE_ENV].env || 'development'
 console.log('============env===@@@@@@@@@@@@@@@@@=', env);
 module.exports = {
     devtool: 'eval-source-map',
     entry: './src/index.js',
     output: {
         path: __dirname + '/build',
-        filename: 'bundle.js'
+        filename: 'js/[name].[chunkhash].js'
     },
     // devServer: {
     //     overlay: true,

@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
     "start": "webpack-dev-server --content-base build --inline",
     "dev": "node build/dev-server.js",
-    "dev:mock": "cross-env NODE_ENV=mock npm run dev",
+    "clean": "rimraf build/js",
+    "dev:mock": "cross-env NODE_ENV=mock npm run clean && npm run build && npm run dev",
     "dev:qafc": "cross-env NODE_ENV=qafc npm run dev",
     "dev:product": "cross-env NODE_ENV=product npm run dev"
   },
@@ -25,7 +27,8 @@
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4",
-    "webpack-hot-middleware": "^2.22.2"
+    "webpack-hot-middleware": "^2.22.2",
+    "rimraf": "^2.6.0"
   },
   "dependencies": {}
 }
