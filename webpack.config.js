@@ -30,6 +30,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': env,
+            '_STUYEVY_': env,
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
