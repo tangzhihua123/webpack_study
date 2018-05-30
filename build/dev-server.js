@@ -5,7 +5,7 @@
 var config = require('../config')
 // 如果Node的环境变量中没有设置当前的环境（NODE_ENV），则使用config中的配置作为当前的环境
 if (!process.env.NODE_ENV) {
-    // process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
 // 一个可以调用默认软件打开网址、图片、文件等内容的插件
@@ -55,19 +55,23 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 })
 
 // 当html-webpack-plugin提交之后通过热重载中间件发布重载动作使得页面重载
-compiler.plugin('compilation', function (compilation) {
-    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-        hotMiddleware.publish({ action: 'reload' })
+compiler.plugin('compilation', function(compilation) {
+    compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
+        hotMiddleware.publish({
+            action: 'reload'
+        })
         cb()
     })
 })
 
 // 将 proxyTable 中的代理请求配置挂在到express服务器上
-Object.keys(proxyTable).forEach(function (context) {
+Object.keys(proxyTable).forEach(function(context) {
     var options = proxyTable[context]
     // 格式化options，例如将'www.example.com'变成{ target: 'www.example.com' }
     if (typeof options === 'string') {
-        options = { target: options }
+        options = {
+            target: options
+        }
     }
     app.use(proxyMiddleware(options.filter || context, options))
 })
@@ -93,19 +97,19 @@ app.use(hotMiddleware);
 // 将静态资源挂到express服务器上
 // app.use(staticPath, express.static('./static'))
 // console.log("本地开发环境变量json====", process.env);
-console.log("process.env=====", process.env)
+// console.log("process.env=====", process.env)
 // console.log(__ENV__, '__ENV__=================')
-// console.log("本地开发环境变量====", process.env.NODE_ENV);
+console.log("本地开发环境变量====", process.env.NODE_ENV);
 // 应用的地址信息，例如：http://localhost:8080
 var uri = 'http://localhost:' + port
 
 // webpack开发中间件合法（valid）之后输出提示语到控制台，表明服务器已启动
-devMiddleware.waitUntilValid(function () {
+devMiddleware.waitUntilValid(function() {
     console.log('> Listening at ' + uri + '\n')
 })
 
 // 启动express服务器并监听相应的端口（8080）
-module.exports = app.listen(port, function (err) {
+module.exports = app.listen(port, function(err) {
     if (err) {
         console.log(err)
         return

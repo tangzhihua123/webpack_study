@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --content-base build --inline",
     "dev": "node build/dev-server.js",
-    "dev:mock": "cross-env NODE_ENV=mock npm dev",
-    "dev:qafc": "cross-env NODE_ENV=qafc npm dev",
-    "dev:product": "cross-env NODE_ENV=product npm dev"
+    "dev:mock": "cross-env NODE_ENV=mock npm run dev",
+    "dev:qafc": "cross-env NODE_ENV=qafc npm run dev",
+    "dev:product": "cross-env NODE_ENV=product npm run dev"
   },
   "author": "",
   "license": "ISC",
